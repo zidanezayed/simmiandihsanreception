@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wedding Reception Invite</title>
+    <style>
+      :root {
+        --bg-tint: rgba(255, 248, 244, 0.82);
+        --ink: #111;
+        --accent: #f55f34;
+        --monogram: #a98978;
+        --shadow: 0 24px 60px rgba(95, 58, 39, 0.22);
+        --flower-left-width: min(49vw, 565px);
+        --flower-right-width: min(36vw, 415px);
+        --left-open-x: clamp(11rem, 24vw, 18rem);
+        --right-open-x: clamp(15.75rem, 30.5vw, 24rem);
+        --fade-delay: 850ms;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        color: var(--ink);
+        font-family: "Baskerville", "Didot", "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+        background: #fff;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          linear-gradient(var(--bg-tint), var(--bg-tint)),
+          url("./Bkgd.jpg") center top / 1100px auto repeat;
+        opacity: 0.95;
+        z-index: -2;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(circle at 50% 26%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 42%),
+          radial-gradient(circle at 50% 67%, rgba(255, 255, 255, 0.68), rgba(255, 255, 255, 0) 38%);
+        z-index: -1;
+      }
+
+      .page {
+        width: min(100%, 1220px);
+        min-height: 100svh;
+        margin: 0 auto;
+        display: grid;
+        grid-template-rows: auto auto auto;
+        align-items: start;
+        justify-items: center;
+        padding: 28px 18px 34px;
+        gap: 8px;
+      }
+
+      .hero {
+        width: 100%;
+        display: grid;
+        place-items: center;
+        position: relative;
+        min-height: min(56svh, 760px);
+        padding-top: 18px;
+      }
+
+      .flower-stage {
+        position: relative;
+        width: min(100%, 1080px);
+        height: min(54svh, 740px);
+        min-height: 540px;
+      }
+
+      .center-bloom {
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        width: clamp(250px, 25vw, 330px);
+        aspect-ratio: 1 / 1.02;
+        transform: translate(-50%, -50%);
+        background:
+          radial-gradient(circle at center,
+            rgba(255, 255, 255, 0.82) 0%,
+            rgba(255, 255, 255, 0.62) 40%,
+            rgba(255, 255, 255, 0.22) 70%,
+            rgba(255, 255, 255, 0) 100%);
+        border-radius: 44% 56% 48% 52% / 48% 42% 58% 52%;
+        box-shadow:
+          0 12px 28px rgba(93, 68, 48, 0.06);
+        z-index: 0;
+      }
+
+      .flower {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 16px 28px rgba(82, 55, 32, 0.22));
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.86);
+        transition:
+          transform 1350ms cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 500ms ease;
+        will-change: transform, opacity;
+      }
+
+      .flower.left {
+        width: var(--flower-left-width);
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.86);
+        z-index: 2;
+      }
+
+      .flower.right {
+        width: var(--flower-right-width);
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.86);
+        z-index: 1;
+      }
+
+      .monogram {
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -50%);
+        display: block;
+        width: clamp(120px, 13vw, 170px);
+        height: auto;
+        opacity: 0;
+        transition: opacity 700ms ease var(--fade-delay);
+        z-index: 1;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .title {
+        width: min(72vw, 760px);
+        max-width: 100%;
+        opacity: 0;
+        transform: translateY(10px);
+        transition:
+          opacity 700ms ease 1150ms,
+          transform 700ms ease 1150ms;
+        margin-top: -2px;
+      }
+
+      .qr {
+        width: min(78vw, 940px);
+        max-width: 100%;
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 700ms ease 1450ms,
+          transform 700ms ease 1450ms;
+      }
+
+      .flowers-open .flower {
+        opacity: 1;
+      }
+
+      .flowers-open .flower.left {
+        transform: translate(calc(-50% - var(--left-open-x)), -50%) scale(1);
+      }
+
+      .flowers-open .flower.right {
+        transform: translate(calc(-50% + var(--right-open-x)), -50%) scale(1);
+      }
+
+      .flowers-open .monogram,
+      .flowers-open .title,
+      .flowers-open .qr {
+        opacity: 1;
+      }
+
+      .flowers-open .title,
+      .flowers-open .qr {
+        transform: translateY(0);
+      }
+
+      .title-wrap {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        margin-top: -78px;
+      }
+
+      .qr-wrap {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        padding-top: 0;
+      }
+
+      .family-contact {
+        display: grid;
+        justify-items: center;
+        gap: 10px;
+        width: 100%;
+        margin-top: 14px;
+        padding-bottom: 18px;
+        color: #171717;
+        text-align: center;
+      }
+
+      .family-contact-title {
+        font-size: clamp(1.55rem, 2.3vw, 2rem);
+        line-height: 1.1;
+        font-weight: 400;
+        letter-spacing: 0.01em;
+      }
+
+      .family-contact-links {
+        display: grid;
+        justify-items: center;
+        gap: 4px;
+      }
+
+      .family-contact a {
+        color: inherit;
+        text-decoration: none;
+        font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+        line-height: 1.15;
+        font-style: italic;
+      }
+
+      .family-contact a:hover,
+      .family-contact a:focus-visible {
+        text-decoration: underline;
+        text-underline-offset: 0.12em;
+      }
+
+      @media (max-width: 900px) {
+        :root {
+          --flower-left-width: min(60vw, 470px);
+          --flower-right-width: min(46vw, 340px);
+          --left-open-x: clamp(5.4rem, 18vw, 7.8rem);
+          --right-open-x: clamp(8.4rem, 24vw, 10.5rem);
+        }
+
+        .page {
+          padding-top: 20px;
+        }
+
+        .hero {
+          min-height: 45svh;
+        }
+
+        .flower-stage {
+          height: 41svh;
+          min-height: 430px;
+        }
+
+        .center-bloom {
+          width: clamp(190px, 28vw, 250px);
+        }
+
+        .monogram {
+          top: 40%;
+          width: clamp(92px, 11vw, 135px);
+        }
+
+        .title {
+          width: min(84vw, 690px);
+        }
+
+        .qr {
+          width: min(90vw, 920px);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          padding: 14px 12px 24px;
+          gap: 14px;
+        }
+
+        .hero {
+          min-height: 39svh;
+        }
+
+        .flower-stage {
+          height: 35svh;
+          min-height: 340px;
+        }
+
+        .center-bloom {
+          width: 58vw;
+        }
+
+        .title {
+          width: min(90vw, 560px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .flower,
+        .monogram,
+        .title,
+        .qr {
+          transition: none !important;
+          animation: none !important;
+        }
+
+        .flower {
+          opacity: 1;
+        }
+
+        .monogram,
+        .title,
+        .qr {
+          opacity: 1;
+          transform: none;
+        }
+
+        .flowers-open .flower.left {
+          transform: translate(calc(-50% - var(--left-open-x)), -50%) scale(1);
+        }
+
+        .flowers-open .flower.right {
+          transform: translate(calc(-50% + var(--right-open-x)), -50%) scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page" aria-label="Wedding reception invite">
+      <section class="hero">
+        <div class="flower-stage" aria-hidden="true">
+          <div class="center-bloom"></div>
+          <img class="flower left" src="./Left Flower.png" alt="" />
+          <img class="flower right" src="./Right Flower.png" alt="" />
+          <img class="monogram" src="./Middle SI.png" alt="S and I initials" />
+        </div>
+      </section>
+
+      <section class="title-wrap" aria-label="Wedding reception title">
+        <img class="title" src="./Wedding Reception Title.png" alt="Wedding Reception" />
+      </section>
+
+      <section class="qr-wrap" aria-label="QR codes">
+        <img class="qr" src="./QR.png" alt="Reception and parking QR codes with labels" />
+      </section>
+
+      <section class="family-contact" aria-label="Family contacts">
+        <div class="family-contact-title">Rehna &amp; Shama Families</div>
+        <div class="family-contact-links">
+          <a href="tel:+918129597929">+91 8129 5979 29</a>
+          <a href="tel:+919292885825">+91 9292 8858 25</a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const root = document.body;
+        requestAnimationFrame(() => {
+          root.classList.add("flowers-open");
+        });
+      });
+    </script>
+  </body>
+</html>
