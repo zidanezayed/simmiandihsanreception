@@ -159,7 +159,7 @@
       }
 
       .qr {
-        width: min(78vw, 940px);
+        width: min(60vw, 760px);
         max-width: 100%;
         opacity: 0;
         transform: translateY(12px);
@@ -208,19 +208,12 @@
       .family-contact {
         display: grid;
         justify-items: center;
-        gap: 10px;
+        gap: 6px;
         width: 100%;
         margin-top: 14px;
         padding-bottom: 18px;
         color: #171717;
         text-align: center;
-      }
-
-      .family-contact-title {
-        font-size: clamp(1.55rem, 2.3vw, 2rem);
-        line-height: 1.1;
-        font-weight: 400;
-        letter-spacing: 0.01em;
       }
 
       .family-contact-links {
@@ -278,13 +271,14 @@
         }
 
         .qr {
-          width: min(90vw, 920px);
+          width: min(68vw, 760px);
         }
       }
 
       @media (max-width: 640px) {
         :root {
           --left-open-x: clamp(7rem, 24vw, 9.2rem);
+          --right-open-x: clamp(7.25rem, 20vw, 8.8rem);
         }
 
         .page {
@@ -307,6 +301,19 @@
 
         .title {
           width: min(90vw, 560px);
+        }
+
+        .qr {
+          width: min(74vw, 430px);
+          max-width: 100%;
+        }
+
+        .family-contact {
+          margin-top: 8px;
+        }
+
+        .family-contact a {
+          font-size: clamp(1.2rem, 5vw, 1.5rem);
         }
       }
 
@@ -356,11 +363,10 @@
       </section>
 
       <section class="qr-wrap" aria-label="QR codes">
-        <img class="qr" src="./QR.png" alt="Reception and parking QR codes with labels" />
+        <img class="qr" src="./QR Tight.png" alt="Reception and parking QR codes with labels" />
       </section>
 
       <section class="family-contact" aria-label="Family contacts">
-        <div class="family-contact-title">Rehna &amp; Shama Families</div>
         <div class="family-contact-links">
           <a href="tel:+918129597929">+91 8129 5979 29</a>
           <a href="tel:+919292885825">+91 9292 8858 25</a>
