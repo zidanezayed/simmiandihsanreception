@@ -158,6 +158,18 @@
         margin-top: -2px;
       }
 
+      .names {
+        position: relative;
+        width: min(62vw, 620px);
+        max-width: 100%;
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 700ms ease 1290ms,
+          transform 700ms ease 1290ms;
+        z-index: 1;
+      }
+
       .qr {
         width: min(60vw, 760px);
         max-width: 100%;
@@ -182,27 +194,53 @@
 
       .flowers-open .monogram,
       .flowers-open .title,
+      .flowers-open .names,
       .flowers-open .qr {
         opacity: 1;
       }
 
       .flowers-open .title,
+      .flowers-open .names,
       .flowers-open .qr {
         transform: translateY(0);
       }
 
-      .title-wrap {
+      .title-wrap,
+      .names-wrap {
         display: grid;
         place-items: center;
         width: 100%;
+        position: relative;
+      }
+
+      .title-wrap {
         margin-top: -78px;
+      }
+
+      .names-wrap {
+        margin-top: 2px;
+        padding: 8px 0 10px;
+      }
+
+      .names-wrap::before {
+        content: "";
+        position: absolute;
+        inset: -2px 4% -10px;
+        background:
+          linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.84),
+            rgba(255, 255, 255, 0.55) 58%,
+            rgba(255, 255, 255, 0));
+        border-radius: 36px;
+        filter: blur(6px);
+        z-index: 0;
       }
 
       .qr-wrap {
         display: grid;
         place-items: center;
         width: 100%;
-        padding-top: 0;
+        padding-top: 4px;
       }
 
       .family-contact {
@@ -270,6 +308,10 @@
           width: min(84vw, 690px);
         }
 
+        .names {
+          width: min(58vw, 620px);
+        }
+
         .qr {
           width: min(68vw, 760px);
         }
@@ -303,6 +345,15 @@
           width: min(90vw, 560px);
         }
 
+        .names-wrap {
+          margin-top: 0;
+          padding: 10px 0 8px;
+        }
+
+        .names {
+          width: min(72vw, 520px);
+        }
+
         .qr {
           width: min(74vw, 430px);
           max-width: 100%;
@@ -323,6 +374,7 @@
         .flower,
         .monogram,
         .title,
+        .names,
         .qr {
           transition: none !important;
           animation: none !important;
@@ -334,6 +386,7 @@
 
         .monogram,
         .title,
+        .names,
         .qr {
           opacity: 1;
           transform: none;
@@ -362,6 +415,10 @@
 
       <section class="title-wrap" aria-label="Wedding reception title">
         <img class="title" src="./Wedding Reception Title.png" alt="Wedding Reception" />
+      </section>
+
+      <section class="names-wrap" aria-label="Couple names">
+        <img class="names" src="./Names Transparent.png" alt="Simran Fazil with Ihsan Imthiaz" />
       </section>
 
       <section class="qr-wrap" aria-label="QR codes">
